@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Discover Mars</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="bootstrap.css">
+</head>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-danger">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">D.Roman</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="#">Home
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Resume</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About Me</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                        aria-haspopup="true" aria-expanded="false">Projects</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Global Weather Patterns</a>
+                        <a class="dropdown-item" href="#">Mars Facts</a>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/scrape">Refresh Data</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <br>
+                <div class="card h-100 text-white bg-danger mb-3">
+                    <div class="card-header">Latest News</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{ mars_data.headline }}</h4>
+                        <br>
+                        <p class="card-text">{{ mars_data.description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <br>
+                {{mars_data.marstable|safe}}
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <br><br>
+                <div class="card bg-dark text-white">
+                    <img src={{mars_data.featuredimage}} class="card-img" alt="featured_image">
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">Featured Image</h5>
+                    </div>
+                </div>
+            </div>
+
+            {% for row in mars_data.hemisphereimages %}
+            <div class="col-2">
+                <br><br>
+                <div class="card bg-dark text-white">
+                    <img src={{row.imageurl}} class="card-img" alt={{row.title}}>
+                    <div class="card-img-overlay">
+                        <h5 class="card-title">{{row.title}}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+
+    </div>
+</body>
+
+</html>
